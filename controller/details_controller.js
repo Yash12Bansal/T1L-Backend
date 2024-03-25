@@ -1,5 +1,6 @@
 const User = require("../models/User.js");
-
+const NewPatientRequest=require("../models/New_Patients_Requests.js");
+const Expert=require("../models/Signed_Up_Experts.js");
 module.exports.addDetails = function (req, res) {
   var {
     email,
@@ -14,35 +15,158 @@ module.exports.addDetails = function (req, res) {
     doctorName,
   } = req.body;
   console.log("this si calleddddd" + email);
-  User.updateOne(
-    { email: email },
-    {
-      $set: {
-        name: name,
-        sex: gender,
-        dob: dob,
-        total_doses: doses,
-        doctor_name: doctorName,
-        year_of_diabetes_diagnosis: yearOfDiagnosis,
-        weight: weight,
-        height: height,
-        phone: phone,
-      },
-    },
-    {
-      multi: true,
-      upsert: true,
-    }
-  )
-    .then((obj) => {
-      res.send({
-        kq: 1,
-        msg: "ADD HO GAYO DETAILS",
-      });
+  NewPatientRequest.findOne({ email: email }).then((existingUser) => {
+      if(existingUser){
+        NewPatientRequest.updateOne(
+          { email: email },
+          {
+            $set: {
+              name: name,
+            },
+          }
+          // {
+          //   multi: true,
+          //   upsert: true,
+          // }
+        )
+          .then((obj) => {
+            const filter = { name: { $in: ['Dr. Rajiv Singla', doctorName] } };            
+            Expert.updateMany(
+              // {'name':doctorName},
+              filter, 
+              {$push:{
+               patients:{
+                email:email
+                }
+        
+              }},
+              {
+                multi:true,
+                upsert:true
+            
+            }          
+    
+              )
+              .then((obj) => {
+                User.updateOne(
+                  { email: email },
+                  {
+                    $set: {
+                      name: name,
+                      sex: gender,
+                      dob: dob,
+                      total_doses: doses,
+                      doctor_name: doctorName,
+                      year_of_diabetes_diagnosis: yearOfDiagnosis,
+                      weight: weight,
+                      height: height,
+                      phone: phone,
+                    },
+                  },
+                  {
+                    multi: true,
+                    upsert: true,
+                  }
+                )
+                  .then((obj) => {
+                    console.log("done")
+                    res.send({
+                      code: 1,
+                      msg: "",
+                    });
+        
+                    // res.send({
+                    //   kq: 1,
+                    //   msg: "ADD HO GAYO DETAILS",
+                    // });
+                  })
+                  .catch((err) => {
+                    console.log("Error: " + err);
+                  });  
+        
+              // res.send({
+              //     kq: 1,
+              //     msg: "Blood Glucose Entry done",
+              //     });
+        
+        })
+           .catch((err) => {
+              console.log('Error: ' + err);
+          });
+            
+        })
+      
+      }
+      else {
+        // {$or:[{"doctor_name":doctorName},{"doctor_name":"Sam Wilson"}]}, 
+        const filter = { name: { $in: ['Dr. Rajiv Singla', doctorName] } };            
+
+        Expert.updateMany(
+
+          // {name:doctorName},
+          filter,
+        {$push:{
+           patients:{
+            email:email
+            }
+    
+          }},
+          {
+            multi:true,
+            upsert:true
+        
+        }          
+          )
+          .then((obj) => {
+            User.updateOne(
+              { email: email },
+              {
+                $set: {
+                  name: name,
+                  sex: gender,
+                  dob: dob,
+                  total_doses: doses,
+                  doctor_name: doctorName,
+                  year_of_diabetes_diagnosis: yearOfDiagnosis,
+                  weight: weight,
+                  height: height,
+                  phone: phone,
+                },
+              },
+              {
+                multi: true,
+                upsert: true,
+              }
+            )
+              .then((obj) => {
+                console.log("done")
+                res.send({
+                  code: 1,
+                  msg: "",
+                });
+    
+                // res.send({
+                //   kq: 1,
+                //   msg: "ADD HO GAYO DETAILS",
+                // });
+              })
+              .catch((err) => {
+                console.log("Error: " + err);
+              });  
+    
+          // res.send({
+          //     kq: 1,
+          //     msg: "Blood Glucose Entry done",
+          //     });
+    
     })
-    .catch((err) => {
-      console.log("Error: " + err);
-    });
+       .catch((err) => {
+          console.log('Error: ' + err);
+      });
+        
+
+  }
+  });
 };
 
 // function(err, numberAffected){

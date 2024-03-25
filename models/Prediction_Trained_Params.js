@@ -60,7 +60,7 @@ const pred_trained_params_schema = new mongoose.Schema({
     },
     division_by:{
         type:Number,
-        default:1.0
+        default:4.0
     },      
 });
 

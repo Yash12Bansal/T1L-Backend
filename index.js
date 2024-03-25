@@ -10,20 +10,21 @@ const cookieSession = require("cookie-session");
 const passportSetup = require("./config/passport");
 const authRoute = require("./routes/web_auth");
 const app = express();
-app.use(cors());
+// const logout = require('express-passport-logout');
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   next();
+// });
+// app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: "GET,POST,DELETE,PUT",
+    credentials: true,
+  })
+);
 
 app.use(cookieParser());
-// app.use(
-//   session({
-//     secret: "secret",
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: {
-//       secure: false,
-//       maxAge: 7 * 24 * 60 * 60 * 1000,
-//     },
-//   })
-// );
 // app.use(
 //   bodyParser.urlencoded({
 //
@@ -47,19 +48,26 @@ app.use(express.json());
 // const { OAuth2Client } = require("google-auth-library");
 // const User = require("./models/User.js");
 app.use(
-  cookieSession({
-    name: "Session",
-    keys: ["cyberwolve"],
-    maxAge: 24 * 60 * 60 * 100,
+  session({
+    name: "Express session cookie2",
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: false,
+      maxAge: 24 * 60 * 60 * 1000,
+    },
   })
 );
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: "GET,POST,DELETE,PUT",
-    credentials: true,
-  })
-);
+
+// app.use(
+//   cookieSession({
+//     name: "My Cookie",
+//     keys: ["cyberwolve"],
+//     maxAge: 24 * 60*60 * 1000,
+//   })
+// );
+
 // authUser = (request, accessToken, refreshToken, profile, done) => {
 //   return done(null, profile);
 // };
@@ -76,11 +84,10 @@ app.use(
 //     authUser
 //   )
 // );
-
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use("/auth", authRoute);
 
+// app.use("/auth", authRoute);
 app.use("/", require("./routes"));
 // const client = new OAuth2Client(
 //   "550164351391-335ovnajfvmmce9u2eesnrrpjpocsgqc.apps.googleusercontent.com"

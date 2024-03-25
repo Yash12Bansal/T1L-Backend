@@ -1,17 +1,54 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const Expert = require("../models/Signed_Up_Experts");
 const passport = require("passport");
-console.log("dfdfdfd" + process.env.CLIENT_ID);
+console.log("" + process.env.CLIENT_ID);
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
       callbackURL: "/auth/web/google/callback",
-      scope: ["profile", "email"],
+      scope: ["email", "profile"],
     },
     function (accessToken, refreshToken, profile, callback) {
+      console.log("teee");
+      console.log(profile);
+      Expert.findOne({ email: profile.emails[0].value }).then((x) => {
+        if (x) {
+          // if (x.toJSON().web_usage_access) callback(null, profile);
+          // else {
       callback(null, profile);
+          // }
+        } else {
+          Expert.create({
+            email: profile.emails[0].value,
+            name: profile.displayName,
+          }).then((x) => {
+      callback(null, profile);
+    });
+        }
+      });
 
+      // callback(null, profile);
+
+      /////////////////////////////////
+      // Expert.findOne(
+      //   { email: profile.emails[0].value }).then(existingUser=>{
+      //     if(!existingUser){
+      //       Expert.create({email:profile.emails[0].value}).then(()=>{
+      //         res.send({
+      //           code: 1,
+      //           msg: "",
+      //         });
+
+      //       })
+      //     }
+      //     else{}
+      //   })
+      //   function (err, user) {
+      //     // return done(err, user);
+      //   }
+      // );
       // const user = {
       //   username: profile.displayName,
       //   avatar: profile.photos[0],

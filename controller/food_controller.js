@@ -50,6 +50,7 @@ module.exports.addFood=function(req,res){
           date:date,
           food_name:food_name,
           food_quantity:food_quantity,
+          
           food_category:food_category
         }
       }},

@@ -4,7 +4,7 @@ const each_bg_schema = new mongoose.Schema({
         type:String
     },
     date:{
-        type:String
+        type:Date
     },
     time:{
         type:String
@@ -23,6 +23,7 @@ const bg_schema = new mongoose.Schema({
     bg_entries_list:[each_bg_schema]
 
 });
+
 
 const BloodGlucose = mongoose.model('blood_glucose_entry', bg_schema);
 module.exports=BloodGlucose
