@@ -189,14 +189,21 @@ app.use("/", require("./routes"));
 //   console.log("get called");
 //   res.send("<h1>T1 Life Backend Work Started<h1/>");
 // });"172.20.21.207" || "localhost",
-app.listen(port, function (err) {
-  if (err) {
-    console.log("Error occured");
-    return;
-  } else {
-    console.log("Express server is runni successfully");
-  }
-});
+
+
+//////////////////////////SERVER LISTEN ING CODE
+// app.listen(port, function (err) {
+//   if (err) {
+//     console.log("Error occured");
+//     return;
+//   } else {
+//     console.log("Express server is runni successfully");
+//   }
+// });
+//////////////////////////SERVER LISTEN ING CODE
+
+
+
 // you need to use the alias of the table with the column of course id in it
 
 // like sce.course_id
