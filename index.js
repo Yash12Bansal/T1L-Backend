@@ -192,7 +192,7 @@ app.use("/", require("./routes"));
 //   console.log("get called");
 //   res.send("<h1>T1 Life Backend Work Started<h1/>");
 // });"172.20.21.207" || "localhost",
-app.listen(port, function (err) {
+app.listen("https://zealous-gear-ant.cyclic.app", function (err) {
   if (err) {
     console.log("Error occured");
     return;

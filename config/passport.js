@@ -7,7 +7,8 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: `http://localhost:8080/auth/web/google/callback`,
+      // http://localhost:8080      
+      callbackURL: `https://zealous-gear-ant.cyclic.app/auth/web/google/callback`,
       scope: ["email", "profile"],
     },
     function (accessToken, refreshToken, profile, callback) {
