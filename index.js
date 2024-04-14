@@ -100,7 +100,7 @@ app.use(
 
 // const passportConfig = require('./config/passport')(passport);
 // app.use("/auth", authRoute);
-app.use("/", require("./routes"));
+app.use("https://zealous-gear-ant.cyclic.app", require("./routes"));
 // const client = new OAuth2Client(
 //   "550164351391-335ovnajfvmmce9u2eesnrrpjpocsgqc.apps.googleusercontent.com"
 // );

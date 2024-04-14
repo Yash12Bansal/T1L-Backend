@@ -25,6 +25,7 @@ passport.use(
             email: profile.emails[0].value,
             name: profile.displayName,
           }).then((x) => {
+            console.log("this is clledd tafter db ")
       callback(null, profile);
     });
         }
