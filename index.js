@@ -39,7 +39,7 @@ app.use(
 // const flash = require('connect-flash');
 // const { Strategy: GoogleStrategy } = require("passport-google-oauth20");
 const port = 8080;
-const db = require("./config/mongoose");
+// const db = require("./config/mongoose");
 // app.use(session({ secret: 'your-secret-key', resave: false, saveUninitialized: true }));
 // app.use(cors());
 app.use(express.json());
@@ -202,7 +202,30 @@ app.use("/", require("./routes"));
 // });
 //////////////////////////SERVER LISTEN ING CODE
 
+var mongoose = require("mongoose");
+// const express = require("express");
 
+// const app = express();
+// mongodb://localhost/T1LifeDB
+// "mongodb+srv://samwilson14111:e53tJB2McTvAzlst@t1lcluster.rn9wgur.mongodb.net/?retryWrites=true&w=majority&appName=T1LCluster"
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(
+      "mongodb+srv://samwilson14111:e53tJB2McTvAzlst@t1lcluster.rn9wgur.mongodb.net/test?retryWrites=true&w=majority&appName=T1LCluster"
+    );
+
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.log(error);
+    process.exit(1);
+  }
+};
+
+connectDB().then(() => {
+  app.listen(8080, () => {
+    console.log("listening for requests. ye rahi request sss ss ");
+  });
+});
 
 // you need to use the alias of the table with the column of course id in it
 
