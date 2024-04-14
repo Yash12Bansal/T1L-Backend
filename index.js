@@ -6,6 +6,10 @@ const cookieParser = require("cookie-parser");
 const express = require("express");
 const passport = require("passport");
 const cors = require("cors");
+const path = require('path');
+const ejsFolder = path.join(__dirname, 'routes');
+
+// Configure Express to serve static files from the views folder
 const cookieSession = require("cookie-session");
 const passportSetup = require("./config/passport");
 const authRoute = require("./routes/web_auth");
@@ -16,13 +20,7 @@ const app = express();
 //   next();
 // });
 // app.use(cors());
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: "GET,POST,DELETE,PUT",
-    credentials: true,
-  })
-);
+app.use(express.static(ejsFolder));
 
 app.use(cookieParser());
 // app.use(
@@ -47,17 +45,26 @@ const db = require("./config/mongoose");
 app.use(express.json());
 // const { OAuth2Client } = require("google-auth-library");
 // const User = require("./models/User.js");
+// saveUninitialized: false,
+// resave: false,
+// cookie: {
+//   secure: false,
+//   maxAge: 24 * 60 * 60 * 1000,
+// }
+
 app.use(
-  session({
-    name: "Express session cookie2",
-    secret: "secret",
-    resave: false,
+  session(
+    {
     saveUninitialized: false,
+    resave: false,
+    secret: "secret",
     cookie: {
       secure: false,
-      maxAge: 24 * 60 * 60 * 1000,
-    },
-  })
+      maxAge: 2 * 24 * 60 * 60 * 1000,
+    }
+
+  }
+  )
 );
 
 // app.use(
@@ -86,7 +93,15 @@ app.use(
 // );
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: "GET,POST,DELETE,PUT",
+    credentials: true,
+  })
+);
 
+// const passportConfig = require('./config/passport')(passport);
 // app.use("/auth", authRoute);
 app.use("/", require("./routes"));
 // const client = new OAuth2Client(

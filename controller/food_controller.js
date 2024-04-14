@@ -42,10 +42,11 @@ module.exports.getFood=function(req,res){
 module.exports.addFood=function(req,res){
   var {email,date,time,food_name,food_quantity,food_category}=req.body;
   console.log("this si calledddddbgg"+email);
+  
   FoodEntry.updateOne(
       {"email": email}, 
       {$push:{
-          extra_detail_entries:{
+        food_entries_list:{
           time:time,
           date:date,
           food_name:food_name,

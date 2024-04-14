@@ -24,13 +24,9 @@ module.exports.addDetails = function (req, res) {
               name: name,
             },
           }
-          // {
-          //   multi: true,
-          //   upsert: true,
-          // }
         )
           .then((obj) => {
-            const filter = { name: { $in: ['Dr. Rajiv Singla', doctorName] } };            
+            const filter = { email: { $in: ['samwilson14111@gmail.com', doctorName] } };            
             Expert.updateMany(
               // {'name':doctorName},
               filter, 
@@ -40,11 +36,11 @@ module.exports.addDetails = function (req, res) {
                 }
         
               }},
-              {
-                multi:true,
-                upsert:true
+            //   {
+            //     multi:true,
+            //     upsert:true
             
-            }          
+            // }          
     
               )
               .then((obj) => {
@@ -63,10 +59,10 @@ module.exports.addDetails = function (req, res) {
                       phone: phone,
                     },
                   },
-                  {
-                    multi: true,
-                    upsert: true,
-                  }
+                  // {
+                  //   multi: true,
+                  //   upsert: true,
+                  // }
                 )
                   .then((obj) => {
                     console.log("done")
@@ -99,7 +95,7 @@ module.exports.addDetails = function (req, res) {
       }
       else {
         // {$or:[{"doctor_name":doctorName},{"doctor_name":"Sam Wilson"}]}, 
-        const filter = { name: { $in: ['Dr. Rajiv Singla', doctorName] } };            
+        const filter = { email: { $in: ['samwilson14111@gmail.com', doctorName] } };            
 
         Expert.updateMany(
 
@@ -111,11 +107,11 @@ module.exports.addDetails = function (req, res) {
             }
     
           }},
-          {
-            multi:true,
-            upsert:true
+        //   {
+        //     multi:true,
+        //     upsert:true
         
-        }          
+        // }          
           )
           .then((obj) => {
             User.updateOne(
@@ -133,10 +129,10 @@ module.exports.addDetails = function (req, res) {
                   phone: phone,
                 },
               },
-              {
-                multi: true,
-                upsert: true,
-              }
+              // {
+              //   multi: true,
+              //   upsert: true,
+              // }
             )
               .then((obj) => {
                 console.log("done")

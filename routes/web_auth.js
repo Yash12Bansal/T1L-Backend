@@ -1,16 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const logout = require("express-passport-logout");
+// const logout = require("express-passport-logout");
 const passport = require("passport");
 router.get("/login/success", (req, res) => {
   console.log("/login/success");
+  console.log(req.user);
+
   if (req.user) {
+    console.log("user is found");
     res.send({
       success: true,
       message: "Success",
       user: req.user,
     });
   } else {
+    console.log("user is not found");
+
     res.status(404).json({
       error: true,
       message: "aa Authorized",
@@ -33,30 +38,21 @@ router.get(
     successRedirect: "http://localhost:3000/",
     failureRedirect: `${process.env.CLIENT_URL}/login/unApproved`,
   })
+    
 );
 router.get(
   "/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
+  passport.authenticate("google", { scope: ["profile", "email"],session:true })
 );
 
-router.post("/logout", (req, res) => {
-  // res.logout();
-  console.log("logout called there")
-
-  res.clearCookie('connect.sid');
-  res.clearCookie('Express session cookie2');
-  req.logout(req.user,(err) => {
+router.get("/logout", (req, res) => {
+  req.logout((err) => {
     console.log("logout callback called there")
 
     if (err) {
       console.log("This is the logour err", err);
     }
-    req.session.destroy(function (err) { 
-      // destroys the session
-      console.log("destroy session callback called there")
-
       res.redirect("http://localhost:3000/");
-		});    
   });
 });
 module.exports = router;

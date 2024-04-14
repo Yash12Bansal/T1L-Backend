@@ -14,5 +14,5 @@ router.post("/extraDetails", predController.addExtraDetails);
 router.get("/predictionStatus/:email", predController.getPredictionStatus);
 router.post("/accepted",predController.acceptPrediction);
 router.post("/rejected",predController.rejectPrediction);
-
+router.get("/getPredictionParams/:email",predController.getPredictionParams);
 module.exports = router;

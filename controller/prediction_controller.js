@@ -182,7 +182,22 @@ module.exports.rejectPrediction = function (req, res) {
     }
   });
 };
+module.exports.getPredictionParams=function(req,res){
+  var {email}=req.params;
 
+  PredParams.findOne({email:email}).then((params)=>{
+    if(params){
+      res.send(params);
+    }
+    else{
+      res.send({
+        code: 0,
+        msg: "Not found",
+      });
+
+    }
+  })
+}
 //
 module.exports.getPredictionStatus = function (req, res) {
   console.log("Prediction called");
@@ -245,7 +260,7 @@ module.exports.addExtraDetails = function (req, res) {
     food_category,
   } = req.body;
   console.log("this si calledddddbgg" + email);
-  Pred.updateOne(
+  PredExtraDetails.updateOne(
     { email: email },
     {
       $push: {
@@ -348,12 +363,14 @@ module.exports.updateParamsAndroid = function (req, res) {
             msg: "kết nối DB thất bại",
           });
           console.error(err);
-        });
+        });                                              
       // new User({ googleId: userid }).save();
     } else {
       console.log("params added2");
+      
       res.send({
         kq: 1,
+        code:40,
         msg: "Params Updated!!",
       });
 

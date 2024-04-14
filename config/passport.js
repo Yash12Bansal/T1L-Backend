@@ -1,4 +1,4 @@
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const GoogleStrategy = require("passport-google-oauth2").Strategy;
 const Expert = require("../models/Signed_Up_Experts");
 const passport = require("passport");
 console.log("" + process.env.CLIENT_ID);
@@ -7,7 +7,7 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "/auth/web/google/callback",
+      callbackURL: `http://localhost:8080/auth/web/google/callback`,
       scope: ["email", "profile"],
     },
     function (accessToken, refreshToken, profile, callback) {
@@ -61,5 +61,6 @@ passport.serializeUser((user, done) => {
   done(null, user);
 });
 passport.deserializeUser((user, done) => {
+  console.log("deserialize user is called");
   done(null, user);
 });

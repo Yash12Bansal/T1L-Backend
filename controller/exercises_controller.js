@@ -13,6 +13,7 @@ module.exports.getExercises=function(req,res){
 
 module.exports.addExercise=function(req,res){
   var {email,currentTime,endTime,startTime,date,exercise}=req.body;
+  // date=
   console.log("this si calleddddd"+email);
   Exercise.updateOne(
       {"email": email}, 
