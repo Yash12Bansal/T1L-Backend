@@ -35,24 +35,29 @@ router.get("/login/failed", (req, res) => {
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: "http://localhost:3000/",
+    successRedirect:
+      "https://t1-expert-m9v84gvyt-yash12bansals-projects.vercel.app",
     failureRedirect: `${process.env.CLIENT_URL}/login/unApproved`,
   })
-    
 );
 router.get(
   "/google",
-  passport.authenticate("google", { scope: ["profile", "email"],session:true })
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+    session: true,
+  })
 );
 
 router.get("/logout", (req, res) => {
   req.logout((err) => {
-    console.log("logout callback called there")
+    console.log("logout callback called there");
 
     if (err) {
       console.log("This is the logour err", err);
     }
-      res.redirect("http://localhost:3000/");
+    res.redirect(
+      "https://t1-expert-m9v84gvyt-yash12bansals-projects.vercel.app"
+    );
   });
 });
 module.exports = router;

@@ -31,7 +31,7 @@ function checkAuth(req, res, next) {
     next();
   } else {
     // res.redirect(`${process.env.CLIENT_URL}`);
-    res.redirect("http://localhost:3000/");
+    res.redirect("https://t1-expert-m9v84gvyt-yash12bansals-projects.vercel.app");
 
   }
 }
