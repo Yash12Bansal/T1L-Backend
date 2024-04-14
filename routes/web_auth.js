@@ -35,8 +35,7 @@ router.get("/login/failed", (req, res) => {
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect:
-      "https://t1-expert-m9v84gvyt-yash12bansals-projects.vercel.app",
+    successRedirect: "https://t1-expert.vercel.app",
     failureRedirect: `${process.env.CLIENT_URL}/login/unApproved`,
   })
 );
@@ -55,9 +54,7 @@ router.get("/logout", (req, res) => {
     if (err) {
       console.log("This is the logour err", err);
     }
-    res.redirect(
-      "https://t1-expert-m9v84gvyt-yash12bansals-projects.vercel.app"
-    );
+    res.redirect("https://t1-expert.vercel.app");
   });
 });
 module.exports = router;

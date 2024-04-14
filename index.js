@@ -6,8 +6,8 @@ const cookieParser = require("cookie-parser");
 const express = require("express");
 const passport = require("passport");
 const cors = require("cors");
-const path = require('path');
-const ejsFolder = path.join(__dirname, 'routes');
+const path = require("path");
+const ejsFolder = path.join(__dirname, "routes");
 
 // Configure Express to serve static files from the views folder
 const cookieSession = require("cookie-session");
@@ -53,18 +53,15 @@ app.use(express.json());
 // }
 
 app.use(
-  session(
-    {
+  session({
     saveUninitialized: false,
     resave: false,
     secret: "secret",
     cookie: {
       secure: false,
       maxAge: 2 * 24 * 60 * 60 * 1000,
-    }
-
-  }
-  )
+    },
+  })
 );
 
 // app.use(
@@ -95,7 +92,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(
   cors({
-    origin: "https://t1-expert-m9v84gvyt-yash12bansals-projects.vercel.app",
+    origin: "https://t1-expert.vercel.app",
     methods: "GET,POST,DELETE,PUT",
     credentials: true,
   })
