@@ -21,17 +21,8 @@ const app = express();
 // });
 // app.use(cors());
 app.use(express.static(ejsFolder));
-app.use(
-  cors({
-    origin: "https://t1-expert.vercel.app",
-    methods: "GET,POST,DELETE,PUT",
-    preflightContinue: true,
-    credentials: true,
-  })
-);
 
 app.use(cookieParser());
-
 // app.use(
 //   bodyParser.urlencoded({
 //
@@ -110,6 +101,14 @@ app.use(
 // https://t1-expert.vercel.app
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(
+  cors({
+    origin: "https://t1-expert.vercel.app/",
+    methods: "GET,POST,DELETE,PUT",
+    preflightContinue: true,
+    credentials: true,
+  })
+);
 
 // const passportConfig = require('./config/passport')(passport);
 // app.use("/auth", authRoute);
