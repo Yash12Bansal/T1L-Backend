@@ -56,9 +56,12 @@ app.use(
   session({
     saveUninitialized: false,
     resave: false,
+    name: "MyCoolWebAppCookieName",
     secret: "secret",
     cookie: {
-      secure: false,
+      secure: true,
+      httpOnly: false,
+      sameSite: "none",
       maxAge: 2 * 24 * 60 * 60 * 1000,
     },
   })
@@ -93,7 +96,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://t1-expert.vercel.app",
     methods: "GET,POST,DELETE,PUT",
     credentials: true,
   })
