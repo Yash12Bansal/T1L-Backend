@@ -55,7 +55,7 @@ app.set('trust proxy', 1);
 app.use(
   session({
     saveUninitialized: true,
-    resave: false,
+    resave: true,
     name: "t1 expert cookie",
     secret: "secret",
     cookie: {
