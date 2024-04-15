@@ -35,10 +35,13 @@ app.use(
     extended: true,
   })
 );
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://t1-expert.vercel.app");
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "https://t1-expert.vercel.app");
+//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//   res.header("Access-Control-Allow-Credentials", true);
+//   next();
+// });
 
 // const flash = require('connect-flash');
 // const { Strategy: GoogleStrategy } = require("passport-google-oauth20");
@@ -55,7 +58,7 @@ app.use(express.json());
 //   secure: false,
 //   maxAge: 24 * 60 * 60 * 1000,
 // }
-app.set('trust proxy', 1);
+app.set("trust proxy", 1);
 app.use(
   session({
     saveUninitialized: true,
@@ -102,6 +105,7 @@ app.use(
   cors({
     origin: "https://t1-expert.vercel.app",
     methods: "GET,POST,DELETE,PUT",
+    preflightContinue: true,
     credentials: true,
   })
 );
