@@ -60,9 +60,8 @@ app.use(
     cookie: {
       secure: true,
       sameSite:"none",
-      httpOnly:true,
-      path:"/",
       maxAge: 2 * 24 * 60 * 60 * 1000,
+      domain: '.domain.com'
     },
   })
 );
