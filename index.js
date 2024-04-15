@@ -51,7 +51,7 @@ app.use(express.json());
 //   secure: false,
 //   maxAge: 24 * 60 * 60 * 1000,
 // }
-
+app.set('trust proxy', 1);
 app.use(
   session({
     saveUninitialized: true,
@@ -60,7 +60,7 @@ app.use(
     secret: "secret",
     cookie: {
       secure: true,
-      httpOnly: false,
+      httpOnly: true,
       sameSite: "none",
       maxAge: 2 * 24 * 60 * 60 * 1000,
     },
