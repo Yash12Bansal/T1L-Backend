@@ -94,6 +94,10 @@ app.use(
 // https://t1-expert.vercel.app
 app.use(passport.initialize());
 app.use(passport.session());
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://t1-expert.vercel.app");
+  next();
+});
 app.use(
   cors({
     origin: "https://t1-expert.vercel.app",
