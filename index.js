@@ -61,6 +61,7 @@ app.use(
       secure: true,
       sameSite:"none",
       httpOnly:true,
+      path:"/",
       maxAge: 2 * 24 * 60 * 60 * 1000,
     },
   })
