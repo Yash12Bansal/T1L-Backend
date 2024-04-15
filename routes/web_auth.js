@@ -35,7 +35,7 @@ router.get("/login/failed", (req, res) => {
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: "https://t1-expert.vercel.app",
+    successRedirect: "http://localhost:3000",
     failureRedirect: `${process.env.CLIENT_URL}/login/unApproved`,
   })
 );
@@ -54,7 +54,7 @@ router.get("/logout", (req, res) => {
     if (err) {
       console.log("This is the logour err", err);
     }
-    res.redirect("https://t1-expert.vercel.app");
+    res.redirect("http://localhost:3000");
   });
 });
 module.exports = router;

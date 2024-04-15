@@ -90,11 +90,12 @@ app.use(
 //     authUser
 //   )
 // );
+// https://t1-expert.vercel.app
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(
   cors({
-    origin: "https://t1-expert.vercel.app",
+    origin: "http://localhost:3000",
     methods: "GET,POST,DELETE,PUT",
     credentials: true,
   })

@@ -31,7 +31,7 @@ function checkAuth(req, res, next) {
     next();
   } else {
     // res.redirect(`${process.env.CLIENT_URL}`);
-    res.redirect("https://t1-expert.vercel.app");
+    res.redirect("http://localhost:3000");
 
   }
 }
