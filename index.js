@@ -54,7 +54,7 @@ app.use(express.json());
 
 app.use(
   session({
-    saveUninitialized: false,
+    saveUninitialized: true,
     resave: false,
     name: "t1 expert cookie",
     secret: "secret",
