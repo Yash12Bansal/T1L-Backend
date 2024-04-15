@@ -54,14 +54,12 @@ app.use(express.json());
 
 app.use(
   session({
-    saveUninitialized: true,
+    saveUninitialized: false,
     resave: false,
     secret: "secret",
     cookie: {
-      secure: true,
-      sameSite:'none',
+      secure: false,
       maxAge: 2 * 24 * 60 * 60 * 1000,
-      domain: '.domain.com'
     },
   })
 );
@@ -192,7 +190,6 @@ app.use("/", require("./routes"));
 //   console.log("get called");
 //   res.send("<h1>T1 Life Backend Work Started<h1/>");
 // });"172.20.21.207" || "localhost",
-
 
 //////////////////////////SERVER LISTEN ING CODE
 // app.listen(port, function (err) {
