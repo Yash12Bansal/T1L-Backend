@@ -60,7 +60,7 @@ app.use(
     secret: "secret",
     cookie: {
       secure: true,
-      // httpOnly: true,
+      httpOnly: false,
       sameSite: "none",
       maxAge: 2 * 24 * 60 * 60 * 1000,
     },
@@ -100,7 +100,6 @@ app.use(
     methods: "GET,POST,DELETE,PUT",
     credentials: true,
   })
-  
 );
 
 // const passportConfig = require('./config/passport')(passport);
