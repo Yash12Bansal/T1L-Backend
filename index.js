@@ -58,7 +58,9 @@ app.use(
     resave: false,
     secret: "secret",
     cookie: {
-      secure: false,
+      secure: true,
+      sameSite:"none",
+      httpOnly:true,
       maxAge: 2 * 24 * 60 * 60 * 1000,
     },
   })
@@ -100,7 +102,7 @@ app.use(
 
 // const passportConfig = require('./config/passport')(passport);
 // app.use("/auth", authRoute);
-app.use("https://zealous-gear-ant.cyclic.app", require("./routes"));
+app.use("/", require("./routes"));
 // const client = new OAuth2Client(
 //   "550164351391-335ovnajfvmmce9u2eesnrrpjpocsgqc.apps.googleusercontent.com"
 // );
