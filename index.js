@@ -56,11 +56,11 @@ app.use(
   session({
     saveUninitialized: false,
     resave: false,
-    name: "MyCoolWebAppCookieName",
+    name: "t1 expert cookie",
     secret: "secret",
     cookie: {
       secure: true,
-      httpOnly: false,
+      httpOnly: true,
       sameSite: "none",
       maxAge: 2 * 24 * 60 * 60 * 1000,
     },
