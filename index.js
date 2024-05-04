@@ -103,10 +103,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 // methods: "GET,POST,DELETE,PUT",
 // preflightContinue: true,
+// origin: "*",
 
 app.use(
   cors({
-    origin: "*",
+    origin: ["https://t1-expert.vercel.app/","https://zealous-gear-ant.cyclic.app"],
     credentials: true,
   })
 );
