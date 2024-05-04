@@ -63,14 +63,14 @@ app.use(express.json());
 app.set("trust proxy", 1);
 app.use(
   session({
-    saveUninitialized: false,
-    resave: false,
+    saveUninitialized: true,
+    resave: true,
     name: "t1 expert cookie",
     secret: "secret",
     cookie: {
       secure: false,
-      // httpOnly: false,
-      // sameSite: "none",
+      httpOnly: false,
+      sameSite: "none",
       maxAge: 2 * 24 * 60 * 60 * 1000,
     },
   })
@@ -106,14 +106,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 // preflightContinue: true,
 // origin: "*",
-
-app.use(
-  cors({
-    origin: "https://t1-expert.vercel.app/",
-    methods: "GET,POST,DELETE,PUT",
-    credentials: true,
-  })
-);
+// {
+//   origin: "https://t1-expert.vercel.app/",
+//   methods: "GET,POST,DELETE,PUT",
+//   credentials: true,
+// }
+app.use(cors());
 
 // const passportConfig = require('./config/passport')(passport);
 // app.use("/auth", authRoute);
