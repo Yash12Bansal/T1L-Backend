@@ -5,6 +5,7 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const express = require("express");
 const passport = require("passport");
+import initPassport from "./config/passport";
 const cors = require("cors");
 const path = require("path");
 const ejsFolder = path.join(__dirname, "routes");
@@ -58,17 +59,18 @@ app.use(express.json());
 //   secure: false,
 //   maxAge: 24 * 60 * 60 * 1000,
 // }
-app.set("trust proxy", 1);
+
+// app.set("trust proxy", 1);
 app.use(
   session({
-    saveUninitialized: true,
-    resave: true,
+    saveUninitialized: false,
+    resave: false,
     name: "t1 expert cookie",
     secret: "secret",
     cookie: {
-      secure: true,
-      httpOnly: false,
-      sameSite: "none",
+      secure: false,
+      // httpOnly: false,
+      // sameSite: "none",
       maxAge: 2 * 24 * 60 * 60 * 1000,
     },
   })
@@ -99,15 +101,16 @@ app.use(
 //   )
 // );
 // https://t1-expert.vercel.app
+initPassport();
 app.use(passport.initialize());
 app.use(passport.session());
-// methods: "GET,POST,DELETE,PUT",
 // preflightContinue: true,
 // origin: "*",
 
 app.use(
   cors({
-    origin: ["https://t1-expert.vercel.app/","https://zealous-gear-ant.cyclic.app"],
+    origin: "https://t1-expert.vercel.app/",
+    methods: "GET,POST,DELETE,PUT",
     credentials: true,
   })
 );
