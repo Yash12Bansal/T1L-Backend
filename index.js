@@ -5,7 +5,7 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const express = require("express");
 const passport = require("passport");
-import initPassport from "./config/passport";
+import initPassport from "./config/passport.js";
 const cors = require("cors");
 const path = require("path");
 const ejsFolder = path.join(__dirname, "routes");
