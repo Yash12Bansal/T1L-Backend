@@ -106,7 +106,7 @@ app.use(passport.session());
 
 app.use(
   cors({
-    origin: "https://t1-expert.vercel.app",
+    origin: "*",
     credentials: true,
   })
 );
