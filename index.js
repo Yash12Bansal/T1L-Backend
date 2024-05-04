@@ -101,7 +101,7 @@ app.use(
 //   )
 // );
 // https://t1-expert.vercel.app
-initPassport();
+// initPassport();
 app.use(passport.initialize());
 app.use(passport.session());
 // preflightContinue: true,

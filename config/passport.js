@@ -3,7 +3,7 @@ const Expert = require("../models/Signed_Up_Experts");
 const passport = require("passport");
 console.log("" + process.env.CLIENT_ID);
 
-export function initPassport(){
+// export function initPassport(){
   passport.use(
     new GoogleStrategy(
       {
@@ -70,4 +70,4 @@ export function initPassport(){
     done(null, user);
   });
   
-}
+// }
