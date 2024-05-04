@@ -5,7 +5,6 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const express = require("express");
 const passport = require("passport");
-import initPassport from "./config/passport.js";
 const cors = require("cors");
 const path = require("path");
 const ejsFolder = path.join(__dirname, "routes");
@@ -59,7 +58,6 @@ app.use(express.json());
 //   secure: false,
 //   maxAge: 24 * 60 * 60 * 1000,
 // }
-
 app.set("trust proxy", 1);
 app.use(
   session({
@@ -68,7 +66,7 @@ app.use(
     name: "t1 expert cookie",
     secret: "secret",
     cookie: {
-      secure: false,
+      secure: true,
       httpOnly: false,
       sameSite: "none",
       maxAge: 2 * 24 * 60 * 60 * 1000,
@@ -101,16 +99,14 @@ app.use(
 //   )
 // );
 // https://t1-expert.vercel.app
-// initPassport();
-app.use(passport.initialize());
-app.use(passport.session());
-// preflightContinue: true,
-// origin: "*",
 // {
-//   origin: "https://t1-expert.vercel.app/",
+//   origin: "https://t1-expert.vercel.app",
 //   methods: "GET,POST,DELETE,PUT",
+//   preflightContinue: true,
 //   credentials: true,
 // }
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(cors());
 
 // const passportConfig = require('./config/passport')(passport);
