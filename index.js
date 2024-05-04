@@ -106,7 +106,7 @@ app.use(
 //   credentials: true,
 // }
 app.use(passport.initialize());
-app.use(passport.session());
+app.us
 app.use(cors());
 
 // const passportConfig = require('./config/passport')(passport);
