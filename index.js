@@ -101,11 +101,12 @@ app.use(
 // https://t1-expert.vercel.app
 app.use(passport.initialize());
 app.use(passport.session());
+// methods: "GET,POST,DELETE,PUT",
+// preflightContinue: true,
+
 app.use(
   cors({
     origin: "https://t1-expert.vercel.app",
-    methods: "GET,POST,DELETE,PUT",
-    preflightContinue: true,
     credentials: true,
   })
 );
