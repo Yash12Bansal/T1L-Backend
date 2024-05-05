@@ -99,15 +99,16 @@ app.use(
 //   )
 // );
 // https://t1-expert.vercel.app
-// {
-//   origin: "https://t1-expert.vercel.app",
-//   methods: "GET,POST,DELETE,PUT",
-//   preflightContinue: true,
-//   credentials: true,
-// }
 app.use(passport.initialize());
 // app.us
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://t1-expert.vercel.app",
+    methods: "GET,POST,DELETE,PUT",
+    preflightContinue: true,
+    credentials: true,
+  })
+);
 
 // const passportConfig = require('./config/passport')(passport);
 // app.use("/auth", authRoute);
