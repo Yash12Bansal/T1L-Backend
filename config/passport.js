@@ -10,7 +10,7 @@ passport.use(
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
       // http://localhost:8080
-      callbackURL: `https://t1l-backend.onrender.com/auth/web/google/callback`,
+      callbackURL: `https://t1l-backend.onrender.com/auth/google/callback`,
       scope: ["email", "profile"],
     },
     function (accessToken, refreshToken, profile, callback) {
